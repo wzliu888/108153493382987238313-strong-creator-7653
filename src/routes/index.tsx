@@ -17,10 +17,23 @@ function App() {
     return () => clearInterval(timer)
   }, [])
 
+  const formatDate = (date: Date) => {
+    return date.toLocaleDateString('en-US', { 
+      year: 'numeric', 
+      month: 'long', 
+      day: 'numeric' 
+    })
+  }
+
   return (
     <div className="text-center">
-      <div className="bg-gray-800 text-white p-4 text-xl font-mono">
-        Current Time: {currentTime.toLocaleTimeString()}
+      <div className="bg-gray-800 text-white p-4 font-mono">
+        <div className="text-xl">
+          Current Time: {currentTime.toLocaleTimeString()}
+        </div>
+        <div className="text-sm text-gray-300 mt-1">
+          {formatDate(currentTime)}
+        </div>
       </div>
       
       <header className="min-h-screen flex flex-col items-center justify-center bg-[#282c34] text-white text-[calc(10px+2vmin)]">
