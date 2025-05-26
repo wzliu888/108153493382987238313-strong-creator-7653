@@ -1,4 +1,5 @@
 import { createFileRoute } from '@tanstack/react-router'
+import { useState, useEffect } from 'react'
 import logo from '../logo.svg'
 
 export const Route = createFileRoute('/')({
@@ -6,8 +7,22 @@ export const Route = createFileRoute('/')({
 })
 
 function App() {
+  const [currentTime, setCurrentTime] = useState(new Date())
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setCurrentTime(new Date())
+    }, 1000)
+
+    return () => clearInterval(timer)
+  }, [])
+
   return (
     <div className="text-center">
+      <div className="bg-gray-800 text-white p-4 text-xl font-mono">
+        Current Time: {currentTime.toLocaleTimeString()}
+      </div>
+      
       <header className="min-h-screen flex flex-col items-center justify-center bg-[#282c34] text-white text-[calc(10px+2vmin)]">
         <img
           src={logo}
